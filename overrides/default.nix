@@ -933,6 +933,14 @@ lib.composeManyExtensions [
         VERSION = old.version;
       });
 
+      fsspec = prev.fsspec.overridePythonAttrs (old: {
+          buildInputs = old.buildInputs or [ ] ++ [
+            prev.hatchling
+            prev.hatch-vcs
+          ];
+        }
+      );
+
       gdal = prev.gdal.overridePythonAttrs (
         old: {
           nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ gdal ];
@@ -3240,6 +3248,14 @@ lib.composeManyExtensions [
               outputHashes = {
                 "lsp-types-0.95.1" = "sha256-8Oh299exWXVi6A39pALOISNfp8XBya8z+KT/Z7suRxQ=";
                 "salsa-0.18.0" = "sha256-y5PuGeQNUHLhU8YY9wPbGk71eNZ0aM0Xpvwfyf+UZwM=";
+              };
+            };
+            "0.5.2" = {
+              # https://raw.githubusercontent.com/astral-sh/ruff/0.5.2/Cargo.lock
+              lockFile = ./ruff/0.5.2-Cargo.lock;
+              outputHashes = {
+                "lsp-types-0.95.1" = "sha256-8Oh299exWXVi6A39pALOISNfp8XBya8z+KT/Z7suRxQ=";
+                "salsa-0.18.0" = "sha256-gcaAsrrJXrWOIHUnfBwwuTBG1Mb+lUEmIxSGIVLhXaM=";
               };
             };
             "0.5.1" = {
